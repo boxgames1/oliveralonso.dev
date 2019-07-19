@@ -1,0 +1,33 @@
+<html>
+
+<head>
+  <title>Currency converter</title>
+  <script src="converter.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="form">
+      <div class="form-group">
+        <label for="from">From</label>
+        <select id="from" onchange="calculate_conversion()">
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="to">From</label>
+        <select id="to" onchange="calculate_conversion()">
+        </select>
+      </div>
+      <div class="form-group">
+        <input id="conversion-value" placeholder="Value to convert" onchange="calculate_conversion()" />
+      </div>
+      <div class="result">
+        <h1>Conversion Value:</h1>
+        <span id="conversion-result"></span>
+      </div>
+    </div>
+  </div>
+  <div class="spinner" id="spinner"></div>
+</body>
+</html>
