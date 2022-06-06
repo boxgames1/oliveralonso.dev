@@ -28,6 +28,12 @@
   margin: -40px 0 0 -40px;
   background: url(../images/spinner.GIF) no-repeat;
 }
+.spinner-text {
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  top: 55%;
+}
 #portfolio .mCSB_container {
   margin-right: 0 !important;
 }
