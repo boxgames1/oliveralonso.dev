@@ -2058,7 +2058,7 @@ ul.info-post li {
   line-height: 120px;
   color: rgba(169, 3, 41, 0.8);
 }
-.cb-slideshow li:nth-child(1) span {
+/* .cb-slideshow li:nth-child(1) span {
   background-image: url(http://placehold.it/1000x667/7c7979/ffffff);
 }
 .cb-slideshow li:nth-child(2) span {
@@ -2100,7 +2100,7 @@ ul.info-post li {
   -o-animation-delay: 30s;
   -ms-animation-delay: 30s;
   animation-delay: 30s;
-}
+} */
 .cb-slideshow li:nth-child(2) div {
   -webkit-animation-delay: 6s;
   -moz-animation-delay: 6s;

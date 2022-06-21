@@ -7,9 +7,6 @@ jQuery(document).ready(function ($) {
 
   /*Page Preloading*/
   $(window).load(function () {
-    console.log("====================================");
-    console.log("window load");
-    console.log("====================================");
     $("#spinner").fadeOut(200);
     $("#preloader").delay(200).fadeOut("slow");
     $(".wrapper").fadeIn(200);
@@ -179,9 +176,6 @@ jQuery(document).ready(function ($) {
         },
       });
     }
-    console.log("====================================");
-    console.log("redimensionement end");
-    console.log("====================================");
   }
 
   // On lie l'événement resize à la fonction
@@ -489,8 +483,4 @@ jQuery(document).ready(function ($) {
 
     return false;
   });
-
-  console.log("====================================");
-  console.log("functions load end");
-  console.log("====================================");
 });
