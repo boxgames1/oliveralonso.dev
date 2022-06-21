@@ -1,316 +1,326 @@
-jQuery(document).ready(function($) {
+jQuery(document).ready(function ($) {
+  "use strict";
 
-	"use strict";
+  /* ---------------------------------------------------------------------- */
+  /*	------------------------------- Loading ----------------------------- */
+  /* ---------------------------------------------------------------------- */
 
-	/* ---------------------------------------------------------------------- */
-	/*	------------------------------- Loading ----------------------------- */
-	/* ---------------------------------------------------------------------- */
+  /*Page Preloading*/
+  $(window).load(function () {
+    console.log("====================================");
+    console.log("window load");
+    console.log("====================================");
+    $("#spinner").fadeOut(200);
+    $("#preloader").delay(200).fadeOut("slow");
+    $(".wrapper").fadeIn(200);
+    $("#custumize-style").fadeIn(200);
+  });
 
-	/*Page Preloading*/
-	$(window).load(function() {
-	$('#spinner').fadeOut(200);
-	$('#preloader').delay(200).fadeOut('slow');
-	$('.wrapper').fadeIn(200);
-	$('#custumize-style').fadeIn(200);
-	});
+  /* ---------------------------------------------------------------------- */
+  /* ------------------------------- Taps profile ------------------------- */
+  /* ---------------------------------------------------------------------- */
 
-	/* ---------------------------------------------------------------------- */
-	/* ------------------------------- Taps profile ------------------------- */
-	/* ---------------------------------------------------------------------- */
+  $(".collapse_tabs").click(function () {
+    if ($(this).hasClass("collapsed")) {
+      $(this)
+        .find("i.glyphicon")
+        .removeClass("glyphicon-chevron-down")
+        .addClass("glyphicon-chevron-up");
+    } else {
+      $(this)
+        .find("i.glyphicon")
+        .removeClass("glyphicon-chevron-up")
+        .addClass("glyphicon-chevron-down");
+    }
+  });
 
-	$('.collapse_tabs').click(function() {
+  /* ---------------------------------------------------------------------- */
+  /* -------------------------- easyResponsiveTabs ------------------------ */
+  /* ---------------------------------------------------------------------- */
 
-	if ($(this).hasClass('collapsed')) {
-	$(this).find('i.glyphicon').removeClass("glyphicon-chevron-down").addClass("glyphicon-chevron-up");
-	} else {
-	$(this).find('i.glyphicon').removeClass("glyphicon-chevron-up").addClass("glyphicon-chevron-down");
-	}
+  $("#verticalTab").easyResponsiveTabs({
+    type: "vertical",
+    width: "auto",
+    fit: true,
+  });
 
-	});
+  $("h2.resp-accordion").click(function () {
+    $(this).find(".icon_menu").addClass("icon_menu_active");
+    $("h2.resp-accordion")
+      .not(this)
+      .find(".icon_menu")
+      .removeClass("icon_menu_active");
 
-	/* ---------------------------------------------------------------------- */
-	/* -------------------------- easyResponsiveTabs ------------------------ */
-	/* ---------------------------------------------------------------------- */
+    /*	Scroll To */
+    $("html, body").animate(
+      { scrollTop: $("h2.resp-accordion").offset().top - 50 },
+      600
+    );
+  });
 
-	$('#verticalTab').easyResponsiveTabs({
-	type: 'vertical',
-	width: 'auto',
-	fit: true
-	});
+  $(".resp-tabs-list li").click(function () {
+    $(this).find(".icon_menu").addClass("icon_menu_active");
+    $(".resp-tabs-list li")
+      .not(this)
+      .find(".icon_menu")
+      .removeClass("icon_menu_active");
+  });
 
-	$("h2.resp-accordion").click(function() {
-	$(this).find(".icon_menu").addClass("icon_menu_active");
-	$("h2.resp-accordion").not(this).find(".icon_menu").removeClass("icon_menu_active");
+  $(".resp-tabs-list li").hover(
+    function () {
+      $(this).find(".icon_menu").addClass("icon_menu_hover");
+    },
+    function () {
+      $(this).find(".icon_menu").removeClass("icon_menu_hover");
+    }
+  );
 
-	/*	Scroll To */
-	$('html, body').animate({scrollTop: $('h2.resp-accordion').offset().top - 50}, 600);
-	});
+  $("h2.resp-accordion").hover(
+    function () {
+      $(this).find(".icon_menu").addClass("icon_menu_hover");
+    },
+    function () {
+      $(this).find(".icon_menu").removeClass("icon_menu_hover");
+    }
+  );
 
-	$(".resp-tabs-list li").click(function() {
-	$(this).find(".icon_menu").addClass("icon_menu_active");
-	$(".resp-tabs-list li").not(this).find(".icon_menu").removeClass("icon_menu_active");
-	});
+  /* ---------------------------------------------------------------------- */
+  /* --------------------------- Scroll tabs ------------------------------ */
+  /* ---------------------------------------------------------------------- */
 
+  $(".content_2").mCustomScrollbar({
+    theme: "dark-2",
+    mouseWheelPixels: 400,
+    contentTouchScroll: true,
+    advanced: {
+      updateOnContentResize: true,
+      updateOnBrowserResize: true,
+      autoScrollOnFocus: false,
+    },
+  });
 
-	$(".resp-tabs-list li").hover(function() {
-	$(this).find(".icon_menu").addClass("icon_menu_hover");
-	}, function() {
-	$(this).find(".icon_menu").removeClass("icon_menu_hover");
-	});
+  if ($(".wrapper").height() > $("body").height()) {
+    $("body").mCustomScrollbar({
+      theme: "dark-2",
+      mouseWheelPixels: 500,
+      contentTouchScroll: true,
+      advanced: {
+        updateOnContentResize: true,
+        updateOnBrowserResize: true,
+        autoScrollOnFocus: false,
+      },
+    });
+  }
 
-	$("h2.resp-accordion").hover(function() {
-	$(this).find(".icon_menu").addClass("icon_menu_hover");
-	}, function() {
-	$(this).find(".icon_menu").removeClass("icon_menu_hover");
-	});
+  /* ---------------------------------------------------------------------- */
+  /* ------------------------- Effect tabs -------------------------------- */
+  /* ---------------------------------------------------------------------- */
 
-	/* ---------------------------------------------------------------------- */
-	/* --------------------------- Scroll tabs ------------------------------ */
-	/* ---------------------------------------------------------------------- */
+  var animation_style = "bounceIn";
 
-	$(".content_2").mCustomScrollbar({
-	theme: "dark-2",
-	mouseWheelPixels: 400,
-	contentTouchScroll: true,
-	advanced: {
-	updateOnContentResize: true,
-	updateOnBrowserResize: true,
-	autoScrollOnFocus: false
-	}
-	});
+  $(".dropdown-select").change(function () {
+    animation_style = $(".dropdown-select").val();
+  });
 
-	if($('.wrapper').height()>$('body').height()){
+  $("ul.resp-tabs-list li[class^=tabs-]").click(function () {
+    var tab_name = $(this).attr("data-tab-name");
 
-		$("body").mCustomScrollbar({
-		theme: "dark-2",
-		mouseWheelPixels: 500,
-		contentTouchScroll: true,
-		advanced: {
-		updateOnContentResize: true,
-		updateOnBrowserResize: true,
-		autoScrollOnFocus: false
-		}
-		});
-	}
+    $(".resp-tabs-container").addClass("animated " + animation_style);
+    $(".resp-tabs-container").one(
+      "webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend",
+      function () {
+        $(".resp-tabs-container").removeClass("animated " + animation_style);
+      }
+    );
 
-	/* ---------------------------------------------------------------------- */
-	/* ------------------------- Effect tabs -------------------------------- */
-	/* ---------------------------------------------------------------------- */
+    $(".content_2").mCustomScrollbar("destroy");
+    $(".content_2").mCustomScrollbar({
+      theme: "dark-2",
+      mouseWheelPixels: 400,
+      contentTouchScroll: true,
+      advanced: {
+        updateOnContentResize: true,
+        updateOnBrowserResize: true,
+        autoScrollOnFocus: false,
+      },
+    });
 
-	var animation_style = 'bounceIn';
+    //if (tab_name == "contact")
+    //initialize();
 
-	$('.dropdown-select').change(function() {
-	animation_style = $('.dropdown-select').val();
-	});
+    return false;
+  });
 
-
-	$('ul.resp-tabs-list li[class^=tabs-]').click(function() {
-
-	var tab_name = $(this).attr('data-tab-name');
-
-	$('.resp-tabs-container').addClass('animated ' + animation_style);
-	$('.resp-tabs-container').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
-	$('.resp-tabs-container').removeClass('animated ' + animation_style);
-	});
-
-	$(".content_2").mCustomScrollbar("destroy");
-	$(".content_2").mCustomScrollbar({
-	theme: "dark-2",
-	mouseWheelPixels: 400,
-	contentTouchScroll: true,
-	advanced: {
-	updateOnContentResize: true,
-	updateOnBrowserResize: true,
-	autoScrollOnFocus: false
-	}
-	});
-
-	//if (tab_name == "contact")
-	//initialize();
-
-	return false;
-	});
-
-	/*$("#verticalTab h2.resp-accordion").click(function() {
+  /*$("#verticalTab h2.resp-accordion").click(function() {
 		initialize();
 	});*/
 
-	/* ---------------------------------------------------------------------- */
-	/* ---------------------- redimensionnement ----------------------------- */
-	/* ---------------------------------------------------------------------- */
+  /* ---------------------------------------------------------------------- */
+  /* ---------------------- redimensionnement ----------------------------- */
+  /* ---------------------------------------------------------------------- */
 
-	function redimensionnement() {
+  function redimensionnement() {
+    if (window.matchMedia("(max-width: 800px)").matches) {
+      $(".content_2").mCustomScrollbar("destroy");
+      $(".resp-vtabs .resp-tabs-container").css("height", "100%");
+      $(".content_2").css("height", "100%");
+    } else {
+      $(".resp-vtabs .resp-tabs-container").css("height", "580px");
+      $(".content_2").css("height", "580px");
+      $(".content_2").mCustomScrollbar("destroy");
+      $(".content_2").mCustomScrollbar({
+        theme: "dark-2",
+        mouseWheelPixels: 400,
+        contentTouchScroll: true,
+        advanced: {
+          updateOnContentResize: true,
+          updateOnBrowserResize: true,
+          autoScrollOnFocus: false,
+        },
+      });
+    }
+    console.log("====================================");
+    console.log("redimensionement end");
+    console.log("====================================");
+  }
 
-	if (window.matchMedia("(max-width: 800px)").matches) {
-	$(".content_2").mCustomScrollbar("destroy");
-	$(".resp-vtabs .resp-tabs-container").css("height", "100%");
-	$(".content_2").css("height", "100%");
-	} else {
+  // On lie l'événement resize à la fonction
+  window.addEventListener("load", redimensionnement, false);
+  window.addEventListener("resize", redimensionnement, false);
 
-	$(".resp-vtabs .resp-tabs-container").css("height", "580px");
-	$(".content_2").css("height", "580px");
-	$(".content_2").mCustomScrollbar("destroy");
-	$(".content_2").mCustomScrollbar({
-	theme: "dark-2",
-	mouseWheelPixels: 400,
-	contentTouchScroll: true,
-	advanced: {
-	updateOnContentResize: true,
-	updateOnBrowserResize: true,
-	autoScrollOnFocus: false
-	}
-	});
-
-	}
-
-	}
-
-	// On lie l'événement resize à la fonction
-	window.addEventListener('load', redimensionnement, false);
-	window.addEventListener('resize', redimensionnement, false);
-
-	/*$("#verticalTab h2.resp-accordion").click(function() {
+  /*$("#verticalTab h2.resp-accordion").click(function() {
 		initialize();
 	});*/
 
-	/* ---------------------------------------------------------------------- */
-	/* -------------------------- Contact Form ------------------------------ */
-	/* ---------------------------------------------------------------------- */
+  /* ---------------------------------------------------------------------- */
+  /* -------------------------- Contact Form ------------------------------ */
+  /* ---------------------------------------------------------------------- */
 
-	// Needed variables
-	var $contactform = $('#contactform');
-	var $success = ' Your message has been sent. Thank you!';
-	var response = '';
+  // Needed variables
+  var $contactform = $("#contactform");
+  var $success = " Your message has been sent. Thank you!";
+  var response = "";
 
-	$('#contactform').submit(function() {
-	$.ajax({
-	type: "POST",
-	url: "php/contact.php",
-	data: $(this).serialize(),
-	success: function(msg)
-	{
-	var msg_error = msg.split(",");
-	var output_error = '';
+  $("#contactform").submit(function () {
+    $.ajax({
+      type: "POST",
+      url: "php/contact.php",
+      data: $(this).serialize(),
+      success: function (msg) {
+        var msg_error = msg.split(",");
+        var output_error = "";
 
-	if (msg_error.indexOf('error-message') != -1) {
-	$("#contact-message").addClass("has-error");
-	$("#contact-message").removeClass("has-success");
-	output_error = 'Please enter your message.';
-	} else {
-	$("#contact-message").addClass("has-success");
-	$("#contact-message").removeClass("has-error");
-	}
+        if (msg_error.indexOf("error-message") != -1) {
+          $("#contact-message").addClass("has-error");
+          $("#contact-message").removeClass("has-success");
+          output_error = "Please enter your message.";
+        } else {
+          $("#contact-message").addClass("has-success");
+          $("#contact-message").removeClass("has-error");
+        }
 
-	if (msg_error.indexOf('error-email') != -1) {
+        if (msg_error.indexOf("error-email") != -1) {
+          $("#contact-email").addClass("has-error");
+          $("#contact-email").removeClass("has-success");
+          output_error = "Please enter valid e-mail.";
+        } else {
+          $("#contact-email").addClass("has-success");
+          $("#contact-email").removeClass("has-error");
+        }
 
-	$("#contact-email").addClass("has-error");
-	$("#contact-email").removeClass("has-success");
-	output_error = 'Please enter valid e-mail.';
-	} else {
-	$("#contact-email").addClass("has-success");
-	$("#contact-email").removeClass("has-error");
-	}
+        if (msg_error.indexOf("error-name") != -1) {
+          $("#contact-name").addClass("has-error");
+          $("#contact-name").removeClass("has-success");
+          output_error = "Please enter your name.";
+        } else {
+          $("#contact-name").addClass("has-success");
+          $("#contact-name").removeClass("has-error");
+        }
 
-	if (msg_error.indexOf('error-name') != -1) {
-	$("#contact-name").addClass("has-error");
-	$("#contact-name").removeClass("has-success");
-	output_error = 'Please enter your name.';
-	} else {
-	$("#contact-name").addClass("has-success");
-	$("#contact-name").removeClass("has-error");
-	}
+        if (msg == "success") {
+          response =
+            '<div class="alert alert-success success-send">' +
+            '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' +
+            '<i class="glyphicon glyphicon-ok" style="margin-right: 5px;"></i> ' +
+            $success +
+            "</div>";
 
+          $(".reset").trigger("click");
+          $("#contact-name").removeClass("has-success");
+          $("#contact-email").removeClass("has-success");
+          $("#contact-message").removeClass("has-success");
+          grecaptcha.reset();
+        } else {
+          if (output_error == "") output_error = "Error. Please, try again.";
+          response =
+            '<div class="alert alert-danger error-send">' +
+            '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' +
+            '<i class="glyphicon glyphicon-remove" style="margin-right: 5px;"></i> ' +
+            output_error +
+            "</div>";
+          grecaptcha.reset();
+        }
+        // Hide any previous response text
+        $(".error-send,.success-send").remove();
+        // Show response message
+        $contactform.prepend(response);
+      },
+    });
+    return false;
+  });
 
+  /* ---------------------------------------------------------------------- */
+  /* ----------------------------- Portfolio ------------------------------ */
+  /* ---------------------------------------------------------------------- */
 
-	if (msg == 'success') {
+  var filterList = {
+    init: function () {
+      // MixItUp plugin
+      // http://mixitup.io
+      $("#portfoliolist").mixitup({
+        targetSelector: ".portfolio",
+        filterSelector: ".filter",
+        effects: ["fade"],
+        easing: "snap",
+        // call the hover effect
+        onMixEnd: filterList.hoverEffect(),
+      });
+    },
+    hoverEffect: function () {
+      // Simple parallax effect
+      $("#portfoliolist .portfolio").hover(
+        function () {
+          $(this).find(".label").stop().animate({ bottom: 0 }, 200);
+          $(this).find("img").stop().animate({ top: -30 }, 500);
+        },
+        function () {
+          $(this).find(".label").stop().animate({ bottom: -40 }, 200);
+          $(this).find("img").stop().animate({ top: 0 }, 300);
+        }
+      );
+    },
+  };
 
-		response = '<div class="alert alert-success success-send">' +
-			'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' +
-			'<i class="glyphicon glyphicon-ok" style="margin-right: 5px;"></i> ' + $success
-			+ '</div>';
+  // Run the show!
+  filterList.init();
 
-		$(".reset").trigger('click');
-		$("#contact-name").removeClass("has-success");
-		$("#contact-email").removeClass("has-success");
-		$("#contact-message").removeClass("has-success");
-		grecaptcha.reset();
-	} else {
-		if(output_error=="")output_error ="Error. Please, try again.";
-		response = '<div class="alert alert-danger error-send">' +
-			'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' +
-			'<i class="glyphicon glyphicon-remove" style="margin-right: 5px;"></i> ' + output_error
-			+ '</div>';
-		grecaptcha.reset();
-	}
-	// Hide any previous response text
-	$(".error-send,.success-send").remove();
-	// Show response message
-	$contactform.prepend(response);
-	}
-	});
-	return false;
-	});
+  /* ---------------------------------------------------------------------- */
+  /* ----------------------------- prettyPhoto ---------------------------- */
+  /* ---------------------------------------------------------------------- */
 
-	/* ---------------------------------------------------------------------- */
-	/* ----------------------------- Portfolio ------------------------------ */
-	/* ---------------------------------------------------------------------- */
+  $("a[rel^='portfolio']").prettyPhoto({
+    animation_speed: "fast" /* fast/slow/normal */,
+    social_tools: "",
+    theme: "pp_default",
+    horizontal_padding: 5,
+    deeplinking: false,
+  });
 
+  /* ---------------------------------------------------------------------- */
+  /* ------------------------------ Google Maps --------------------------- */
+  /* ---------------------------------------------------------------------- */
 
-	var filterList = {
-	init: function() {
-
-	// MixItUp plugin
-	// http://mixitup.io
-	$('#portfoliolist').mixitup({
-	targetSelector: '.portfolio',
-	filterSelector: '.filter',
-	effects: ['fade'],
-	easing: 'snap',
-	// call the hover effect
-	onMixEnd: filterList.hoverEffect()
-	});
-
-	},
-	hoverEffect: function() {
-
-	// Simple parallax effect
-	$('#portfoliolist .portfolio').hover(
-	function() {
-	$(this).find('.label').stop().animate({bottom: 0}, 200);
-	$(this).find('img').stop().animate({top: -30}, 500);
-	},
-	function() {
-	$(this).find('.label').stop().animate({bottom: -40}, 200);
-	$(this).find('img').stop().animate({top: 0}, 300);
-	}
-	);
-
-	}
-
-	};
-
-	// Run the show!
-	filterList.init();
-
-	/* ---------------------------------------------------------------------- */
-	/* ----------------------------- prettyPhoto ---------------------------- */
-	/* ---------------------------------------------------------------------- */
-
-	$("a[rel^='portfolio']").prettyPhoto({
-	animation_speed: 'fast', /* fast/slow/normal */
-	social_tools: '',
-	theme: 'pp_default',
-	horizontal_padding: 5,
-	deeplinking: false,
-	});
-
-
-
-	/* ---------------------------------------------------------------------- */
-	/* ------------------------------ Google Maps --------------------------- */
-	/* ---------------------------------------------------------------------- */
-
-	/*var map;
+  /*var map;
 	function initialize() {
 	map = new GMaps({
 	div: '#map',
@@ -330,155 +340,157 @@ jQuery(document).ready(function($) {
 	});
 	}*/
 
-	/* ---------------------------------------------------------------------- */
-	/* --------------------------------- Blog ------------------------------- */
-	/* ---------------------------------------------------------------------- */
+  /* ---------------------------------------------------------------------- */
+  /* --------------------------------- Blog ------------------------------- */
+  /* ---------------------------------------------------------------------- */
 
-	// More blog
-	$('a.read_m').click(function() {
-	var pagina = $(this).attr('href');
-	var postdetail = pagina + '-page';
+  // More blog
+  $("a.read_m").click(function () {
+    var pagina = $(this).attr("href");
+    var postdetail = pagina + "-page";
 
-	if (pagina.indexOf("#post-") != -1) {
+    if (pagina.indexOf("#post-") != -1) {
+      $("#blog-page").hide();
 
-	$('#blog-page').hide();
+      $(postdetail).show();
+      $(".tabs-blog").trigger("click");
+    }
 
-	$(postdetail).show();
-	$(".tabs-blog").trigger('click');
-	}
+    return false;
+  });
 
-	return false;
+  // More blog
+  $("a.read_more").click(function () {
+    var pagina = $(this).attr("href");
+    var postdetail = pagina + "-page";
 
-	});
+    if (pagina.indexOf("#post-") != -1) {
+      $("#blog-page").hide();
 
-	// More blog
-	$('a.read_more').click(function() {
-	var pagina = $(this).attr('href');
-	var postdetail = pagina + '-page';
+      $(postdetail).show();
+      $(".tabs-blog").trigger("click");
+    }
 
-	if (pagina.indexOf("#post-") != -1) {
+    return false;
+  });
 
-	$('#blog-page').hide();
+  //pagination All
+  $(".content-post a").click(function () {
+    var pagina = $(this).attr("href");
 
-	$(postdetail).show();
-	$(".tabs-blog").trigger('click');
-	}
+    if (pagina == "#blog") {
+      $(".content-post").hide();
+      $("#blog-page").show();
+      $(".tabs-blog").trigger("click");
+    }
 
-	return false;
+    return false;
+  });
 
-	});
+  //pagination blog
+  $(".content-post #pagination").click(function () {
+    var pagina = $(this).attr("href");
+    var postdetail = pagina + "-page";
 
-	//pagination All
-	$('.content-post a').click(function() {
-	var pagina = $(this).attr('href');
+    if (pagina.indexOf("#post-") != -1) {
+      $("#blog-page").hide();
+      $(".content-post").hide();
 
-	if (pagina == "#blog") {
+      $(postdetail).show();
+      $(".tabs-blog").trigger("click");
+    }
 
-	$('.content-post').hide();
-	$('#blog-page').show();
-	$(".tabs-blog").trigger('click');
+    return false;
+  });
 
-	}
+  /* ---------------------------------------------------------------------- */
+  /* ---------------------------- icon menu ------------------------------- */
+  /* ---------------------------------------------------------------------- */
 
-	return false;
+  $(".resp-tabs-container h2.resp-accordion").each(function () {
+    if ($(this).hasClass("resp-tab-active")) {
+      $(this).append(
+        "<i class='glyphicon glyphicon-chevron-up arrow-tabs'></i>"
+      );
+    } else {
+      $(this).append(
+        "<i class='glyphicon glyphicon-chevron-down arrow-tabs'></i>"
+      );
+    }
+  });
 
-	});
+  $(".resp-tabs-container h2.resp-accordion").click(function () {
+    if ($(this).hasClass("resp-tab-active")) {
+      $(this)
+        .find("i.arrow-tabs")
+        .removeClass("glyphicon-chevron-down")
+        .addClass("glyphicon-chevron-up");
+    }
 
-	//pagination blog
-	$('.content-post #pagination').click(function() {
+    $(".resp-tabs-container h2.resp-accordion").each(function () {
+      if (!$(this).hasClass("resp-tab-active")) {
+        $(this)
+          .find("i.arrow-tabs")
+          .removeClass("glyphicon-chevron-up")
+          .addClass("glyphicon-chevron-down");
+      }
+    });
+  });
 
+  /* ---------------------------------------------------------------------- */
+  /* -------------------------------- skillbar ---------------------------- */
+  /* ---------------------------------------------------------------------- */
 
-	var pagina = $(this).attr('href');
-	var postdetail = pagina + '-page';
+  $(".tabs-resume").click(function () {
+    $(".skillbar").each(function () {
+      $(this).find(".skillbar-bar").width(0);
+    });
 
-	if (pagina.indexOf("#post-") != -1) {
+    $(".skillbar").each(function () {
+      $(this)
+        .find(".skillbar-bar")
+        .animate(
+          {
+            width: $(this).attr("data-percent"),
+          },
+          2000
+        );
+    });
+  });
 
-	$('#blog-page').hide();
-	$('.content-post').hide();
+  $("#resume")
+    .prev("h2.resp-accordion")
+    .click(function () {
+      $(".skillbar").each(function () {
+        $(this).find(".skillbar-bar").width(0);
+      });
 
-	$(postdetail).show();
-	$(".tabs-blog").trigger('click');
-	}
+      $(".skillbar").each(function () {
+        $(this)
+          .find(".skillbar-bar")
+          .animate(
+            {
+              width: $(this).attr("data-percent"),
+            },
+            2000
+          );
+      });
+    });
 
-	return false;
+  //Change for demo page
+  $("input:radio[name=page_builder]").on("change", function () {
+    $("input:radio[name=page_builder]").each(function () {
+      var $this = $(this);
 
-	});
+      if ($(this).prop("checked")) {
+        window.location.replace($this.val());
+      }
+    });
 
+    return false;
+  });
 
-	/* ---------------------------------------------------------------------- */
-	/* ---------------------------- icon menu ------------------------------- */
-	/* ---------------------------------------------------------------------- */
-
-	$(".resp-tabs-container h2.resp-accordion").each(function() {
-
-	if ($(this).hasClass('resp-tab-active')) {
-	$(this).append("<i class='glyphicon glyphicon-chevron-up arrow-tabs'></i>");
-	} else {
-	$(this).append("<i class='glyphicon glyphicon-chevron-down arrow-tabs'></i>");
-	}
-	});
-
-	$(".resp-tabs-container h2.resp-accordion").click(function() {
-	if ($(this).hasClass('resp-tab-active')) {
-	$(this).find("i.arrow-tabs").removeClass("glyphicon-chevron-down").addClass("glyphicon-chevron-up");
-	}
-
-	$(".resp-tabs-container h2.resp-accordion").each(function() {
-
-	if (!$(this).hasClass('resp-tab-active')) {
-	$(this).find("i.arrow-tabs").removeClass("glyphicon-chevron-up").addClass("glyphicon-chevron-down");
-	}
-	});
-
-
-	});
-
-
-	/* ---------------------------------------------------------------------- */
-	/* -------------------------------- skillbar ---------------------------- */
-	/* ---------------------------------------------------------------------- */
-
-	$('.tabs-resume').click(function() {
-
-	$('.skillbar').each(function() {
-	$(this).find('.skillbar-bar').width(0);
-	});
-
-	$('.skillbar').each(function() {
-	$(this).find('.skillbar-bar').animate({
-	width: $(this).attr('data-percent')
-	}, 2000);
-	});
-
-	});
-
-	$('#resume').prev('h2.resp-accordion').click(function() {
-
-	$('.skillbar').each(function() {
-	$(this).find('.skillbar-bar').width(0);
-	});
-
-	$('.skillbar').each(function() {
-	$(this).find('.skillbar-bar').animate({
-	width: $(this).attr('data-percent')
-	}, 2000);
-	});
-	});
-
-
-	//Change for demo page
-	$('input:radio[name=page_builder]').on('change', function() {
-
-	$('input:radio[name=page_builder]').each(function() {
-
-	var $this = $(this);
-
-	if ($(this).prop('checked')) {
-	window.location.replace($this.val());
-	}
-	});
-
-	return false;
-	});
-
+  console.log("====================================");
+  console.log("functions load end");
+  console.log("====================================");
 });
